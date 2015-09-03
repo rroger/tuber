@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 """
 Standup Module to Play a song
 
@@ -16,7 +18,6 @@ sudo apt-get install libavcodec-extra-53
 import pyglet
 import youtube_dl
 import sys
-import cherrypy
 
 # Bob Marley -- Get up, stand up .. stand up for your rights..
 
@@ -36,7 +37,7 @@ def get_yt_video(yt_url):
           'preferredcodec': 'mp3',
           'preferredquality': '192',
       }],
-      'outtmpl': '%(id)s.%(ext)s'
+      'outtmpl': '/home/rruettimann/workspace/tuber/music/%(id)s.%(ext)s'
   }
   ydl = youtube_dl.YoutubeDL(ydl_opts)
 
@@ -61,20 +62,12 @@ def get_yt_video(yt_url):
 #  print("key: %s value: %s" % (key,video[key]))
 
 # get all videos
-#for yt_url in yt_urls:
-#  yt_videos.append(get_yt_video(yt_url))
+for yt_url in yt_urls:
+  yt_videos.append(get_yt_video(yt_url))
 
 # play first one
-#music = pyglet.resource.media(yt_videos[0]['display_id'] + '.mp3')
-#music.play()
-#print('Start Pyglet App')
-#pyglet.app.run()
-
-class HelloWorld(object):
-    def index(self):
-        return "Hello World!"
-    index.exposed = True
-
-
-cherrypy.server.socket_host = '0.0.0.0'
-cherrypy.quickstart(HelloWorld())
+music = pyglet.resource.media('/home/rruettimann/workspace/tuber/music/'+ yt_videos[0]['display_id'] + '.mp3')
+music.play()
+print('Start Pyglet App')
+print('/home/rruettimann/workspace/tuber/music/'+ yt_videos[0]['display_id'] + '.mp3')
+pyglet.app.run()
