@@ -1,2 +1,21 @@
 [global]
 server.socket_port: 8080
+
+[/html]
+tools.staticdir.on = True
+tools.staticdir.dir = "/home/site/html/"
+tools.staticdir.index = "index.html"
+
+[/css]
+tools.staticdir.on = True
+tools.staticdir.dir = "/home/site/css/"
+
+
+[/js]
+tools.staticdir.on = True
+tools.staticdir.dir = "/home/site/js/"
+
+
+[/img]
+tools.staticdir.on = True
+tools.staticdir.dir = "/home/site/img/"
