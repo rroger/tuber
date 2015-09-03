@@ -3,13 +3,13 @@ Standup Module to Play a song
 
 
 Setup:
-Install python-pip, pyglet python library and avbin library. 
+Install python-pip, pyglet python library and avbin library.
 on Ubuntu:
 sudo apt-get install pyhton python-pip
 sudo pip install pyglet
-sudo apt-get install libavbin-dev libavbin0       
+sudo apt-get install libavbin-dev libavbin0
 sudo pip install --upgrade youtube_dl
-sudo apt-get install libavcodec-extra-53  
+sudo apt-get install libavcodec-extra-53
 
 """
 
@@ -28,7 +28,7 @@ yt_videos = []
 
 def get_yt_video(yt_url):
   """Download a youtube video and convert it to mp3"""
-  
+
   ydl_opts = {
       'format': 'bestaudio/best',
       'postprocessors': [{
@@ -53,7 +53,7 @@ def get_yt_video(yt_url):
   else:
       # Just a video
       video = result
-  
+
   return video
 
 ## Debug video object:
@@ -64,7 +64,7 @@ def get_yt_video(yt_url):
 #for yt_url in yt_urls:
 #  yt_videos.append(get_yt_video(yt_url))
 
-# play first one 
+# play first one
 #music = pyglet.resource.media(yt_videos[0]['display_id'] + '.mp3')
 #music.play()
 #print('Start Pyglet App')
@@ -75,5 +75,6 @@ class HelloWorld(object):
         return "Hello World!"
     index.exposed = True
 
-cherrypy.server.socket_host: '0.0.0.0'
+
+cherrypy.server.socket_host = '0.0.0.0'
 cherrypy.quickstart(HelloWorld())
