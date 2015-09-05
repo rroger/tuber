@@ -5,18 +5,17 @@ Standup Module to Play a song
 
 
 Setup:
-Install python-pip, pyglet python library and avbin library.
+
 on Ubuntu:
-sudo apt-get install pyhton python-pip
+sudo apt-get install pyhton3 python3-pip
 sudo pip install pyglet
 sudo apt-get install libavbin-dev libavbin0
 sudo pip install --upgrade youtube_dl
 sudo apt-get install libavcodec-extra-53
 
 On MacOsX:
-brew install python
-sudo pip install pyglet
-sudo pip install --upgrade youtube_dl
+brew install python3
+sudo pip3 install --upgrade youtube_dl
 brew install libav
 
 Go to:
