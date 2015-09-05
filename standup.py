@@ -111,7 +111,7 @@ print('music/'+ yt_videos[0]['display_id'] + '.wav')
 #pyglet.app.run()
 # Create our Music Player.
 
-if sys.platform().startswith("darwin"): # On Macosx
+if sys.platform.startswith("darwin"): # On Macosx
     pygame.mixer.init()
 
     pygame.mixer.music.load('music/'+ yt_videos[0]['display_id'] + '.wav')
