@@ -51,6 +51,8 @@ import sys
 import time
 import pygame
 import youtube_dl
+from subprocess import call
+
 
 project_dir_path = os.path.dirname(os.path.abspath(__file__))
 print(project_dir_path)
@@ -109,9 +111,12 @@ print('music/'+ yt_videos[0]['display_id'] + '.wav')
 #pyglet.app.run()
 # Create our Music Player.
 
-pygame.mixer.init()
+if sys.platform().startswith("darwin"): # On Macosx
+    pygame.mixer.init()
 
-pygame.mixer.music.load('music/'+ yt_videos[0]['display_id'] + '.wav')
-pygame.mixer.music.set_volume(1.0)
-pygame.mixer.music.play()
-time.sleep(90)
+    pygame.mixer.music.load('music/'+ yt_videos[0]['display_id'] + '.wav')
+    pygame.mixer.music.set_volume(1.0)
+    pygame.mixer.music.play()
+    time.sleep(90)
+else: # On Rasparian
+    call(["omxplayer", "-o local %s" % ('music/'+ yt_videos[0]['display_id'] + '.wav')])
