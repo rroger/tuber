@@ -120,5 +120,5 @@ if sys.platform.startswith("darwin"): # On Macosx
     time.sleep(90)
 else: # On Rasparian
     player = Popen(["omxplayer", 'music/'+ yt_videos[0]['display_id'] + '.wav'])
-    time.sleep(30)
-    player.terminate()
+    time.sleep(3)
+    Popen.kill(player)
