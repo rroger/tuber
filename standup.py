@@ -5,32 +5,58 @@ Standup Module to Play a song
 
 
 Setup:
-Install python-pip, pyglet python library and avbin library.
+
 on Ubuntu:
-sudo apt-get install pyhton python-pip
+sudo apt-get install pyhton3 python3-pip
 sudo pip install pyglet
 sudo apt-get install libavbin-dev libavbin0
 sudo pip install --upgrade youtube_dl
 sudo apt-get install libavcodec-extra-53
 
 On MacOsX:
-brew install python
-sudo pip install pyglet
-sudo pip install --upgrade youtube_dl
+brew install python3
+sudo pip3 install --upgrade youtube_dl
 brew install libav
 
 Go to:
 http://avbin.github.io/AVbin/Download.html
 And install Binaries
 
+PyGame
+Current Instructions
+
+Create and add the following to ~/.bash_profile:
+     # Homebrew binaries now take precedence over Apple defaults
+     export PATH=/usr/local/bin:$PATH
+
+Install Apple Xcode command line tools:
+xcode-select --install
+
+Install homebrew:
+ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+
+Install Python3 "proper" and packages we’ll need for installing PyGame from bitbucket:
+brew install python3 hg sdl sdl_image sdl_mixer sdl_ttf portmidi
+
+Install PyGame:
+pip3 install hg+http://bitbucket.org/pygame/pygame
+
+Restart the Mac for XQuartz changes
+
+
 """
 import os
-import pyglet
-import youtube_dl
+#import pyglet
 import sys
+import time
+import pygame
+import youtube_dl
+import signal
+from subprocess import Popen
 
-project_dir_path = os.path.dirname(os.path.abspath(__file__))
-print project_dir_path
+
+folder = os.path.dirname(os.path.abspath(__file__))
+print(folder)
 
 # Bob Marley -- Get up, stand up .. stand up for your rights..
 
@@ -47,7 +73,7 @@ def get_yt_video(yt_url):
       'format': 'bestaudio/best',
       'postprocessors': [{
           'key': 'FFmpegExtractAudio',
-          'preferredcodec': 'mp3',
+          'preferredcodec': 'wav',
           'preferredquality': '192',
       }],
       'outtmpl': 'music/%(id)s.%(ext)s'
@@ -77,10 +103,3 @@ def get_yt_video(yt_url):
 # get all videos
 for yt_url in yt_urls:
   yt_videos.append(get_yt_video(yt_url))
-
-# play first one
-music = pyglet.resource.media('music/'+ yt_videos[0]['display_id'] + '.mp3')
-music.play()
-print('Start Pyglet App')
-print('music/'+ yt_videos[0]['display_id'] + '.mp3')
-pyglet.app.run()
