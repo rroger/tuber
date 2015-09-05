@@ -51,7 +51,7 @@ import sys
 import time
 import pygame
 import youtube_dl
-from subprocess import call
+from subprocess import Popen
 
 
 project_dir_path = os.path.dirname(os.path.abspath(__file__))
@@ -119,4 +119,6 @@ if sys.platform.startswith("darwin"): # On Macosx
     pygame.mixer.music.play()
     time.sleep(90)
 else: # On Rasparian
-    return_value = call(["omxplayer", 'music/'+ yt_videos[0]['display_id'] + '.wav'])
+    player = Popen(["omxplayer", 'music/'+ yt_videos[0]['display_id'] + '.wav'])
+    time.sleep(30)
+    p.terminate()
