@@ -119,4 +119,4 @@ if sys.platform.startswith("darwin"): # On Macosx
     pygame.mixer.music.play()
     time.sleep(90)
 else: # On Rasparian
-    call(["omxplayer", "-o local %s" % ('music/'+ yt_videos[0]['display_id'] + '.wav')])
+    return_value = call(["omxplayer", 'music/'+ yt_videos[0]['display_id'] + '.wav'])
