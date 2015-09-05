@@ -13,11 +13,24 @@ sudo apt-get install libavbin-dev libavbin0
 sudo pip install --upgrade youtube_dl
 sudo apt-get install libavcodec-extra-53
 
-"""
+On MacOsX:
+brew install python
+sudo pip install pyglet
+sudo pip install --upgrade youtube_dl
+brew install libav
 
+Go to:
+http://avbin.github.io/AVbin/Download.html
+And install Binaries
+
+"""
+import os
 import pyglet
 import youtube_dl
 import sys
+
+project_dir_path = os.path.dirname(os.path.abspath(__file__))
+print project_dir_path
 
 # Bob Marley -- Get up, stand up .. stand up for your rights..
 
@@ -37,7 +50,7 @@ def get_yt_video(yt_url):
           'preferredcodec': 'mp3',
           'preferredquality': '192',
       }],
-      'outtmpl': '/home/rruettimann/workspace/tuber/music/%(id)s.%(ext)s'
+      'outtmpl': 'music/%(id)s.%(ext)s'
   }
   ydl = youtube_dl.YoutubeDL(ydl_opts)
 
@@ -66,8 +79,8 @@ for yt_url in yt_urls:
   yt_videos.append(get_yt_video(yt_url))
 
 # play first one
-music = pyglet.resource.media('/home/rruettimann/workspace/tuber/music/'+ yt_videos[0]['display_id'] + '.mp3')
+music = pyglet.resource.media('music/'+ yt_videos[0]['display_id'] + '.mp3')
 music.play()
 print('Start Pyglet App')
-print('/home/rruettimann/workspace/tuber/music/'+ yt_videos[0]['display_id'] + '.mp3')
+print('music/'+ yt_videos[0]['display_id'] + '.mp3')
 pyglet.app.run()
