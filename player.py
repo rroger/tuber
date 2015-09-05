@@ -36,4 +36,5 @@ def play(song, kill_after=0):
 
 
 if __name__ == '__main__':
-    play('music/X2W3aG8uizA.mp3')
+    _folder = os.path.dirname(os.path.abspath(__file__))
+    play(os.path.join(_folder,'music/X2W3aG8uizA.mp3'), kill_after=10)

@@ -55,8 +55,8 @@ import signal
 from subprocess import Popen
 
 
-project_dir_path = os.path.dirname(os.path.abspath(__file__))
-print(project_dir_path)
+folder = os.path.dirname(os.path.abspath(__file__))
+print(folder)
 
 # Bob Marley -- Get up, stand up .. stand up for your rights..
 
@@ -103,23 +103,3 @@ def get_yt_video(yt_url):
 # get all videos
 for yt_url in yt_urls:
   yt_videos.append(get_yt_video(yt_url))
-
-# play first one
-#music = pyglet.resource.media('music/'+ yt_videos[0]['display_id'] + '.wav')
-#music.play()
-print('Start Pyglet App')
-print('music/'+ yt_videos[0]['display_id'] + '.wav')
-#pyglet.app.run()
-# Create our Music Player.
-
-if sys.platform.startswith("darwin"): # On Macosx
-    pygame.mixer.init()
-
-    pygame.mixer.music.load('music/'+ yt_videos[0]['display_id'] + '.wav')
-    pygame.mixer.music.set_volume(1.0)
-    pygame.mixer.music.play()
-    time.sleep(90)
-else: # On Rasparian
-    player = Popen(["omxplayer", 'music/'+ yt_videos[0]['display_id'] + '.wav'], preexec_fn=os.setsid)
-    time.sleep(5)
-    os.killpg(player.pid, signal.SIGTERM)
