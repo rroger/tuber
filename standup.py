@@ -112,5 +112,6 @@ print('music/'+ yt_videos[0]['display_id'] + '.wav')
 pygame.mixer.init()
 
 pygame.mixer.music.load('music/'+ yt_videos[0]['display_id'] + '.wav')
+pygame.mixer.music.set_volume(1.0)
 pygame.mixer.music.play()
 time.sleep(90)
