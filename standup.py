@@ -23,14 +23,37 @@ Go to:
 http://avbin.github.io/AVbin/Download.html
 And install Binaries
 
+PyGame
+Current Instructions
+
+Create and add the following to ~/.bash_profile:
+     # Homebrew binaries now take precedence over Apple defaults
+     export PATH=/usr/local/bin:$PATH
+
+Install Apple Xcode command line tools:
+xcode-select --install
+
+Install homebrew:
+ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+
+Install Python3 "proper" and packages we’ll need for installing PyGame from bitbucket:
+brew install python3 hg sdl sdl_image sdl_mixer sdl_ttf portmidi
+
+Install PyGame:
+pip3 install hg+http://bitbucket.org/pygame/pygame
+
+Restart the Mac for XQuartz changes
+
+
 """
 import os
-import pyglet
+#import pyglet
 import youtube_dl
 import sys
+import pygame
 
 project_dir_path = os.path.dirname(os.path.abspath(__file__))
-print project_dir_path
+print(project_dir_path)
 
 # Bob Marley -- Get up, stand up .. stand up for your rights..
 
@@ -47,7 +70,7 @@ def get_yt_video(yt_url):
       'format': 'bestaudio/best',
       'postprocessors': [{
           'key': 'FFmpegExtractAudio',
-          'preferredcodec': 'mp3',
+          'preferredcodec': 'wav',
           'preferredquality': '192',
       }],
       'outtmpl': 'music/%(id)s.%(ext)s'
@@ -79,8 +102,15 @@ for yt_url in yt_urls:
   yt_videos.append(get_yt_video(yt_url))
 
 # play first one
-music = pyglet.resource.media('music/'+ yt_videos[0]['display_id'] + '.mp3')
-music.play()
+#music = pyglet.resource.media('music/'+ yt_videos[0]['display_id'] + '.wav')
+#music.play()
 print('Start Pyglet App')
-print('music/'+ yt_videos[0]['display_id'] + '.mp3')
-pyglet.app.run()
+print('music/'+ yt_videos[0]['display_id'] + '.wav')
+#pyglet.app.run()
+# Create our Music Player.
+
+pygame.init()
+
+pygame.mixer.music.load('music/'+ yt_videos[0]['display_id'] + '.wav')
+pygame.mixer.music.play()
+pygame.event.wait()
