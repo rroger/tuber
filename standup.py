@@ -51,6 +51,7 @@ import sys
 import time
 import pygame
 import youtube_dl
+import signal
 from subprocess import Popen
 
 
@@ -119,6 +120,6 @@ if sys.platform.startswith("darwin"): # On Macosx
     pygame.mixer.music.play()
     time.sleep(90)
 else: # On Rasparian
-    player = Popen(["omxplayer", 'music/'+ yt_videos[0]['display_id'] + '.wav'])
-    time.sleep(3)
-    Popen.kill(player)
+    player = Popen(["omxplayer", 'music/'+ yt_videos[0]['display_id'] + '.wav'], preexec_fn=os.setsid)
+    time.sleep(5)
+    os.killpg(player.pid, signal.SIGTERM)
