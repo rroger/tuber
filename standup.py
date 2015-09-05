@@ -47,9 +47,10 @@ Restart the Mac for XQuartz changes
 """
 import os
 #import pyglet
-import youtube_dl
 import sys
+import time
 import pygame
+import youtube_dl
 
 project_dir_path = os.path.dirname(os.path.abspath(__file__))
 print(project_dir_path)
@@ -108,8 +109,8 @@ print('music/'+ yt_videos[0]['display_id'] + '.wav')
 #pyglet.app.run()
 # Create our Music Player.
 
-pygame.init()
+pygame.mixer.init()
 
 pygame.mixer.music.load('music/'+ yt_videos[0]['display_id'] + '.wav')
 pygame.mixer.music.play()
-pygame.event.wait()
+time.sleep(90)
