@@ -1,3 +1,4 @@
 server.conf
 music/*
 .DS_Store
+__pycache__/*
