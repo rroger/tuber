@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import sys
 import time
 import signal
 from abc import ABCMeta
@@ -52,4 +53,8 @@ class MacPlayer(Player):
 
 if __name__ == '__main__':
     _folder = os.path.dirname(os.path.abspath(__file__))
-    play(os.path.join(_folder,'music/X2W3aG8uizA.mp3'), kill_after=10)
+    if sys.platform.startswith('darwin'): # On Macosx
+        _player = player.MacPlayer()
+    else: # On Rasparian
+        _player = player.RaspPlayer()
+    _player.play(os.path.join(_folder,'music/X2W3aG8uizA.mp3'), kill_after=10)
